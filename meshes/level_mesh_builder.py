@@ -30,8 +30,7 @@ class LevelMeshBuilder:
             e = not self.is_blocked(x + 1, z)
             f, g, h = 0, 0, 0
 
-        ao = (a + b + c), (g + h + a), (e + f + g), (c + d + e)
-        return ao
+        return a + b + c, g + h + a, e + f + g, c + d + e
 
     def is_blocked(self, x, z):
         if not (0 <= x < self.map.width and 0 <= z < self.map.depth):
