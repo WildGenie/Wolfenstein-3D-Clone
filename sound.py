@@ -50,7 +50,7 @@ class Sound:
             ID.RAT_0: self.load('no_sound.mp3', volume=0.0),
         }
         #
-        pg.mixer.music.load(self.path + 'theme.ogg')
+        pg.mixer.music.load(f'{self.path}theme.ogg')
         pg.mixer.music.set_volume(0.1)
 
     def load(self, file_name, volume=0.5):

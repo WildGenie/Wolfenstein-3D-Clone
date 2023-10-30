@@ -34,17 +34,19 @@ class InstancedQuadMesh:
 
     def get_vao(self):
         self.update_buffers()
-        #
-        vao = self.ctx.vertex_array(
+        return self.ctx.vertex_array(
             self.program,
             [
                 (self.quad_vbo, '4f 2f /v', 'in_position', 'in_uv'),
-                (self.m_model_vbo, '16f /i', 'm_model',),
+                (
+                    self.m_model_vbo,
+                    '16f /i',
+                    'm_model',
+                ),
                 (self.tex_id_vbo, '1i /i', 'in_tex_id'),
             ],
-            skip_errors=True
+            skip_errors=True,
         )
-        return vao
 
     def render(self):
         if len(self.objects):

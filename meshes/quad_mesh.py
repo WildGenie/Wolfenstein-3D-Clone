@@ -16,14 +16,11 @@ class QuadMesh:
     def get_vao(self):
         vertex_data = self.get_vertex_data()
         vbo = self.ctx.buffer(vertex_data)
-        vao = self.ctx.vertex_array(
+        return self.ctx.vertex_array(
             self.program,
-            [
-                (vbo, self.vbo_format, *self.vbo_attrs)
-            ],
-            skip_errors=True
+            [(vbo, self.vbo_format, *self.vbo_attrs)],
+            skip_errors=True,
         )
-        return vao
 
     def render(self):
         self.vao.render()
@@ -47,5 +44,4 @@ class QuadMesh:
             vert_data += vert_position[vert_index]
             vert_data += uv_coords[vert_index]
 
-        vert_data = np.array(vert_data, dtype='float32')
-        return vert_data
+        return np.array(vert_data, dtype='float32')

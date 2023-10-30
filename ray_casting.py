@@ -30,7 +30,7 @@ class RayCasting:
         dy, delta_y, max_y = self.get_init_data(y1, y2)
         dz, delta_z, max_z = self.get_init_data(z1, z2)
 
-        while not (max_x > 1.0 and max_y > 1.0 and max_z > 1.0):
+        while max_x <= 1.0 or max_y <= 1.0 or max_z <= 1.0:
             #
             cur_tile_pos = (cur_voxel_pos.x, cur_voxel_pos.z)
 
@@ -51,18 +51,13 @@ class RayCasting:
             elif cur_tile_pos in self.level_map.npc_map:
                 return cur_tile_pos
             # ----------------------------------------------
-            if max_x < max_y:
-                if max_x < max_z:
-                    cur_voxel_pos.x += dx
-                    max_x += delta_x
-                else:
-                    cur_voxel_pos.z += dz
-                    max_z += delta_z
+            if max_x < max_y and max_x < max_z:
+                cur_voxel_pos.x += dx
+                max_x += delta_x
+            elif max_x < max_y or max_y >= max_z:
+                cur_voxel_pos.z += dz
+                max_z += delta_z
             else:
-                if max_y < max_z:
-                    cur_voxel_pos.y += dy
-                    max_y += delta_y
-                else:
-                    cur_voxel_pos.z += dz
-                    max_z += delta_z
+                cur_voxel_pos.y += dy
+                max_y += delta_y
         return False
